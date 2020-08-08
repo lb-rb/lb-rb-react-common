@@ -1,0 +1,28 @@
+links:
+  home:
+    title: Home
+    to: /
+    activeSelector: /
+    footer: true
+  articles:
+    title: Articles
+    to: /articles
+    activeSelector: /articles
+    footer: false
+    sections:
+      test:
+        title: Test
+        activeSelector: /artciles/test
+        items:
+          test:
+            id: test
+            title: This is a test
+            subtitle: Some test
+            to: /articles/test/test
+            date: 2020-01-01T12:00:00.000Z
+            article_author: Test
+            section: Test
+            image: /assets/example.png
+            image_title: This is a random image
+            image_subtitle: Generated with /dev/urandom and convert :D
+            image_author: Test

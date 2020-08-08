@@ -1,0 +1,28 @@
+{
+  "extends": [
+    "fbjs-opensource",
+    "plugin:testcafe/recommended",
+  ],
+  "plugins": [
+    "prettier",
+    "react",
+    "testcafe",
+  ],
+  "settings": {
+    "react": {
+      "version": "detect",
+    }
+  },
+  "parser": "babel-eslint",
+  "rules": {
+    "relay/graphql-naming": 0,
+    "max-len": 0,
+    "no-console": ["error", { allow: ["warn", "error"] }],
+    "quote-props": ["error", "as-needed"],
+    "no-confusing-arrow": "off",
+  },
+  "env": {
+    "node": true,
+    "browser": true,
+  }
+}

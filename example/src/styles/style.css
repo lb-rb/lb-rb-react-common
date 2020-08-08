@@ -1,0 +1,82 @@
+h1 {
+  font-size: xxx-large;
+}
+
+.article ul {
+  list-style-type: square;
+  padding-left: 2em;
+}
+
+.article ol {
+  list-style-type: decimal;
+  padding-left: 2em;
+}
+
+blockquote{
+  font-size: 1.4em;
+  margin:50px auto;
+  font-style:italic;
+  color: #555555;
+  padding:1.2em 30px 1.2em 75px;
+  border-left:8px solid #ff2626;
+  line-height:1.6;
+  position: relative;
+  background:#EDEDED;
+}
+
+blockquote::before{
+  font-family:Arial;
+  content: "\201C";
+  color:#ff2626;
+  font-size:4em;
+  position: absolute;
+  left: 10px;
+  top:-10px;
+}
+
+blockquote::after{
+  content: '';
+}
+
+blockquote span{
+  display:block;
+  color:#333333;
+  font-style: normal;
+  font-weight: bold;
+  margin-top:1em;
+}
+
+q {
+  quotes: "»" "«";
+  font-style:italic;
+  color: #555555;
+}
+
+q::before {
+    content: open-quote;
+}
+
+q::after {
+    content: close-quote;
+}
+
+.navbar-light .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(7, 255, 49, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+.navbar-light .navbar-toggler {
+  border-color: #ff2626;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: #ff2626;
+  font-weight: bold;
+  font-size: x-large;
+}
+.navbar-light .navbar-nav .nav-link:hover {
+  color: #07ff31;
+}
+
+footer .navbar-light .navbar-nav .nav-link {
+  font-size: small;
+}
