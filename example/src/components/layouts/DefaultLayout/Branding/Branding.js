@@ -24,16 +24,14 @@ const RightBox = styled(Col)`
 
 const Branding = () => (
   <BrandingRow>
-    <LeftBox xs={3} md={3}>
-    </LeftBox>
+    <LeftBox xs={3} md={3}></LeftBox>
     <RightBox xs={9} md={9}>
-
       <ContainerLeft>
         <div
           css={{
             textAlign: 'center',
             letterSpacing: '0.01em',
-            height: "8vw",
+            height: '8vw',
             marginTop: 15,
             fontSize: 60,
           }}

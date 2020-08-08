@@ -49,8 +49,7 @@ const colors = {
   light: {
     backgroundColor: '#ffffff',
     color: '#222320',
-  }
-  ,
+  },
   body: {
     backgroundColor: '#ffffff',
     color: '#222320',

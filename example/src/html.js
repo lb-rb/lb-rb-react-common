@@ -4,7 +4,7 @@ import {colors} from 'styles/theme';
 
 export default function HTML(props) {
   return (
-    <html lang='de-DE' {...props.htmlAttributes}>
+    <html lang="de-DE" {...props.htmlAttributes}>
       <head>
         <meta charSet="utf-8" />
         <meta httpEquiv="x-ua-compatible" content="ie=edge" />

@@ -1,4 +1,4 @@
-import React, {Component,useState} from 'react';
+import React, {Component, useState} from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import DefaultLayout from 'components/layouts/DefaultLayout';
 import Title from 'components/Title';
 import createUrl from 'utils/createUrl';
-import navigation from '../../data/navigation/primary.yml'
+import navigation from '../../data/navigation/primary.yml';
 
 import Flex from 'components/Flex';
 import CTAButton from 'components/buttons/CTAButton';
@@ -18,13 +18,9 @@ import {media} from 'utils/media';
 
 import Image from 'components/Image';
 
-import {
-  linksShape,
-  sectionItemsType,
-} from 'components/navigation/Primary';
+import {linksShape, sectionItemsType} from 'components/navigation/Primary';
 
-type Props = {
-};
+type Props = {};
 
 const CardTitle = styled(Card.Title)`
   text-decoration: none;
@@ -76,44 +72,59 @@ const ImageAuthor = styled.span`
   color: black;
 `;
 
-const formatDate = (date_string) => {
+const formatDate = date_string => {
   const date = new Date(date_string);
-  const options = { year: 'numeric', month: 'long', day: 'numeric' };
-  return date.toLocaleDateString('de-DE', options) + " " + date.toLocaleTimeString('de-DE',  {hour: '2-digit', minute:'2-digit'}) + " Uhr";
-}
-
+  const options = {year: 'numeric', month: 'long', day: 'numeric'};
+  return (
+    date.toLocaleDateString('de-DE', options) +
+    ' ' +
+    date.toLocaleTimeString('de-DE', {hour: '2-digit', minute: '2-digit'}) +
+    ' Uhr'
+  );
+};
 
 class ArticleCard extends Component<CardProps> {
   render() {
-    const {children, title, subtitle, author, date, image_author, src, to} = this.props;
+    const {
+      children,
+      title,
+      subtitle,
+      author,
+      date,
+      image_author,
+      src,
+      to,
+    } = this.props;
 
     return (
       <a href={to} className="w-100">
         <StyledCard>
           <Card.Img variant="top" as={Image} src={src} />
-            <ImageAuthor>© Image: {image_author}</ImageAuthor>
+          <ImageAuthor>© Image: {image_author}</ImageAuthor>
           <Card.Body>
-            <CardTitle><h2>{title}</h2></CardTitle>
+            <CardTitle>
+              <h2>{title}</h2>
+            </CardTitle>
             <Subtitle>{subtitle}</Subtitle>
           </Card.Body>
           <Card.Footer>
-              <Flex
-                align="center"
-                verticalAlign="center"
-                css={{
-                  paddingTop: 40,
-                  paddingBottom: 20,
-                  flexWrap: 'wrap',
-                  justifyContent: 'center',
+            <Flex
+              align="center"
+              verticalAlign="center"
+              css={{
+                paddingTop: 40,
+                paddingBottom: 20,
+                flexWrap: 'wrap',
+                justifyContent: 'center',
 
-                  [media.greaterThan('xlarge')]: {
-                    paddingTop: 65,
-                  },
-                }}>
-                <CTAButton to={to} type="cta">
-                  Read
-                </CTAButton>
-              </Flex>
+                [media.greaterThan('xlarge')]: {
+                  paddingTop: 65,
+                },
+              }}>
+              <CTAButton to={to} type="cta">
+                Read
+              </CTAButton>
+            </Flex>
           </Card.Footer>
         </StyledCard>
       </a>
@@ -131,10 +142,9 @@ class ArticleSection extends React.Component {
 
   render() {
     return Object.entries(this.props.items).map(([key, item]) => {
-      var today = new Date;
-      var date = new Date(item.date)
-      if (date.valueOf() >= today.valueOf())
-        return;
+      var today = new Date();
+      var date = new Date(item.date);
+      if (date.valueOf() >= today.valueOf()) return;
       return (
         <ArticleCard
           title={item.title}
@@ -143,10 +153,8 @@ class ArticleSection extends React.Component {
           author={item.article_author}
           image_author={item.image_author}
           src={item.image}
-          to={item.to}
-        >
-        </ArticleCard>
-      )
+          to={item.to}></ArticleCard>
+      );
     });
   }
 }
@@ -158,24 +166,26 @@ class ArticleCards extends React.Component {
     };
   }
   render() {
-    return Object.entries(this.props.navigation.links.articles.sections).map(([key, section]) => {
-      return (
-        <p>
-          <TitleRow>
-            <Col>
-              <h2>{section.title}</h2>
-              <ArticleDeck>
-                <ArticleSection
-                  key={key}
-                  title={section.title}
-                  items={section.items}
-                />
-              </ArticleDeck>
-            </Col>
-          </TitleRow>
-        </p>
-      );
-    });
+    return Object.entries(this.props.navigation.links.articles.sections).map(
+      ([key, section]) => {
+        return (
+          <p>
+            <TitleRow>
+              <Col>
+                <h2>{section.title}</h2>
+                <ArticleDeck>
+                  <ArticleSection
+                    key={key}
+                    title={section.title}
+                    items={section.items}
+                  />
+                </ArticleDeck>
+              </Col>
+            </TitleRow>
+          </p>
+        );
+      },
+    );
   }
 }
 

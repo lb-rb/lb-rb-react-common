@@ -12,8 +12,8 @@ module.exports = ({stage, actions}) => {
     },
     plugins: [
       new webpack.DefinePlugin({
-        'global.GENTLY': false
-      })
-    ]
+        'global.GENTLY': false,
+      }),
+    ],
   });
 };

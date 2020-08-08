@@ -1,4 +1,4 @@
-import { MDXRenderer } from 'gatsby-plugin-mdx';
+import {MDXRenderer} from 'gatsby-plugin-mdx';
 import React from 'react';
 import PropTypes from 'prop-types';
 import {graphql, Link} from 'gatsby';
@@ -11,7 +11,7 @@ import styled from '@emotion/styled';
 import DefaultLayout from 'components/layouts/DefaultLayout';
 import Title from 'components/Title';
 import createUrl from 'utils/createUrl';
-import navigation from '../../data/navigation/primary.yml'
+import navigation from '../../data/navigation/primary.yml';
 
 import Image from 'components/Image';
 
@@ -33,8 +33,7 @@ const CardTitle = styled(Card.Title)`
 const ArticleDeck = styled(CardDeck)`
   max-width: 1500px;
   margin: auto;
-`
-;
+`;
 const StyledCard = styled(Card)`
   margin-top: 1rem;
   margin: auto;
@@ -42,7 +41,6 @@ const StyledCard = styled(Card)`
   margin-right: 1em;
   margin-bottom: 1em;
 `;
-
 
 const ArticleTitle = styled.h1`
   font-size: 3.5vmax;
@@ -71,35 +69,43 @@ const ImageAuthor = styled.span`
   font-size: small;
 `;
 
-const formatDate = (date_string) => {
+const formatDate = date_string => {
   const date = new Date(date_string);
-  const options = { year: 'numeric', month: 'long', day: 'numeric' };
-  return date.toLocaleDateString('de-DE', options) + " " + date.toLocaleTimeString('de-DE',  {hour: '2-digit', minute:'2-digit'}) + " Uhr";
-}
+  const options = {year: 'numeric', month: 'long', day: 'numeric'};
+  return (
+    date.toLocaleDateString('de-DE', options) +
+    ' ' +
+    date.toLocaleTimeString('de-DE', {hour: '2-digit', minute: '2-digit'}) +
+    ' Uhr'
+  );
+};
 
 const Articles = ({data}) => (
   <DefaultLayout navigation={navigation}>
     <Title
-      title={data.mdx.frontmatter.title + " - "+ data.mdx.frontmatter.section + " - Articles"}
+      title={
+        data.mdx.frontmatter.title +
+        ' - ' +
+        data.mdx.frontmatter.section +
+        ' - Articles'
+      }
       description={data.mdx.frontmatter.subtitle}
       image={createUrl(data.mdx.frontmatter.image)}
-      url={createUrl('/' + data.mdx.fields.slug)} />
+      url={createUrl('/' + data.mdx.fields.slug)}
+    />
     <TitleRow>
       <Col>
-        <Link to="/articles">
-          Articles
-        </Link> >
-        {" " + data.mdx.frontmatter.section}
+        <Link to="/articles">Articles</Link> >
+        {' ' + data.mdx.frontmatter.section}
         <ArticleTitle>
-          <Link to={"/" + data.mdx.fields.slug}>
+          <Link to={'/' + data.mdx.fields.slug}>
             {data.mdx.frontmatter.title}
           </Link>
         </ArticleTitle>
-        <Subtitle>
-          {data.mdx.frontmatter.subtitle}
-        </Subtitle>
+        <Subtitle>{data.mdx.frontmatter.subtitle}</Subtitle>
         <Author>
-          {data.mdx.frontmatter.article_author}, {formatDate(data.mdx.frontmatter.date)}
+          {data.mdx.frontmatter.article_author},{' '}
+          {formatDate(data.mdx.frontmatter.date)}
         </Author>
       </Col>
     </TitleRow>
@@ -112,7 +118,9 @@ const Articles = ({data}) => (
           <Card.Img variant="top" as={Image} src={data.mdx.frontmatter.image} />
           <Card.Footer>
             <CardTitle>{data.mdx.frontmatter.image_subtitle}</CardTitle>
-            <ImageAuthor>© Image: {data.mdx.frontmatter.image_author}</ImageAuthor>
+            <ImageAuthor>
+              © Image: {data.mdx.frontmatter.image_author}
+            </ImageAuthor>
           </Card.Footer>
         </StyledCard>
         <div className="article">

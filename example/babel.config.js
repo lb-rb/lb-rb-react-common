@@ -1,42 +1,42 @@
 module.exports = {
-  "presets": [
+  presets: [
     [
-      "@babel/preset-env",
+      '@babel/preset-env',
       {
-        "loose": true,
-        "modules": false,
-        "useBuiltIns": "usage",
-        "corejs": "2.6.11",
-        "shippedProposals": true,
-        "targets": {
-          "browsers": [">0.25%", "not dead"],
-        }
-      }
+        loose: true,
+        modules: false,
+        useBuiltIns: 'usage',
+        corejs: '2.6.11',
+        shippedProposals: true,
+        targets: {
+          browsers: ['>0.25%', 'not dead'],
+        },
+      },
     ],
     [
-      "@babel/preset-react",
+      '@babel/preset-react',
       {
-        "useBuiltIns": true,
-        "pragma": "React.createElement",
-      }
+        useBuiltIns: true,
+        pragma: 'React.createElement',
+      },
     ],
-    "@babel/flow"
+    '@babel/flow',
   ],
-  "plugins": [
+  plugins: [
     [
-      "@babel/plugin-proposal-class-properties",
+      '@babel/plugin-proposal-class-properties',
       {
-        "loose": true
-      }
+        loose: true,
+      },
     ],
-    "@babel/plugin-syntax-dynamic-import",
-    "babel-plugin-macros",
+    '@babel/plugin-syntax-dynamic-import',
+    'babel-plugin-macros',
     [
-      "@babel/plugin-transform-runtime",
+      '@babel/plugin-transform-runtime',
       {
-        "helpers": true,
-        "regenerator": true
-      }
+        helpers: true,
+        regenerator: true,
+      },
     ],
-  ]
-}
+  ],
+};

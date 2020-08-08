@@ -43,7 +43,7 @@ module.exports = {
       resolve: 'gatsby-plugin-mdx',
       options: {
         extensions: ['.md', '.mdx'],
-        remarkPlugins: [require("remark-abbr")],
+        remarkPlugins: [require('remark-abbr')],
         shouldBlockNodeFromTransformation(node) {
           return (
             ['NPMPackage', 'NPMPackageReadme'].includes(node.internal.type) ||
