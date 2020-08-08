@@ -6,4 +6,6 @@ const socialLinks = [
 
 const defaultDescription = `Some default description...`;
 
-export {rootUrl, socialLinks, defaultDescription};
+const useGatsbyImage = true;
+
+export {rootUrl, socialLinks, defaultDescription, useGatsbyImage};

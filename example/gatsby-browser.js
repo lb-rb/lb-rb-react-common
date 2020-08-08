@@ -11,5 +11,3 @@ require('./src/styles/style.css');
 // Expose React and ReactDOM for debugging
 window.React = React;
 window.ReactDOM = ReactDOM;
-
-window.useGatsbyImage = true;
