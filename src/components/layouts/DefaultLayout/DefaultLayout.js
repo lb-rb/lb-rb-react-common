@@ -23,7 +23,7 @@ class DefaultLayout extends Component<Props> {
     return (
       <DefaultContainer fluid>
         <Header navigation={navigation} />
-        <div/>
+        <div />
         <Branding />
         {children}
         <Row>

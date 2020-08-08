@@ -21,10 +21,7 @@ const Title = ({title, description, image, url}: Props) => {
         property="og:description"
         content={description || defaultDescription}
       />
-      <meta
-        name="description"
-        content={description || defaultDescription}
-      />
+      <meta name="description" content={description || defaultDescription} />
       <link rel="shortcut icon" type="image/png" href="/favicon.png" />
       <meta property="og:image" content={image || defaultImage} />
       {url && <meta property="og:url" content={url} />}

@@ -4,15 +4,12 @@ import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Nav from 'react-bootstrap/Nav';
-import { Location } from '@reach/router';
-import { SocialIcon } from 'react-social-icons';
+import {Location} from '@reach/router';
+import {SocialIcon} from 'react-social-icons';
 import styled from '@emotion/styled';
 
-import {
-  linksShape,
-} from '../../../navigation/Primary';
+import {linksShape} from '../../../navigation/Primary';
 
-import {media} from '../../../../utils/media';
 import {colors} from 'styles/theme';
 import {socialLinks} from 'config';
 
@@ -34,12 +31,7 @@ class HeaderNavigation extends React.Component {
       })
       .map(([key, link]) => {
         return (
-          <NavLink
-            key={key}
-            isActive={false}
-            title={link.title}
-            to={link.to}
-          />
+          <NavLink key={key} isActive={false} title={link.title} to={link.to} />
         );
       });
   }
@@ -54,9 +46,7 @@ class SocialIcons extends React.Component {
   render() {
     const {urls} = this.props;
     return urls.map(url => {
-      return (
-        <SocialIconStyled url={url} />
-      )
+      return <SocialIconStyled url={url} />;
     });
   }
 }
@@ -72,16 +62,21 @@ class Header extends Component<Props> {
             backgroundColor: colors.light.backgroundColor,
             color: colors.light.color,
           }}>
-          <Navbar expand='lg'>
+          <Navbar expand="lg">
             <Container>
-              <Navbar.Toggle aria-controls='header-navbar-nav' />
-              <Navbar.Collapse id='header-navbar-nav'>
+              <Navbar.Toggle aria-controls="header-navbar-nav" />
+              <Navbar.Collapse id="header-navbar-nav">
                 <Location>
-                 {({ navigate, location }) => (
-                   <Nav defaultActiveKey='/' className="mr-auto" activeKey={decodeURI(location.pathname.replace(/([^\/])$/, '$1/'))}>
-                     <HeaderNavigation navigation={navigation} />
-                   </Nav>
-                 )}
+                  {({navigate, location}) => (
+                    <Nav
+                      defaultActiveKey="/"
+                      className="mr-auto"
+                      activeKey={decodeURI(
+                        location.pathname.replace(/([^\/])$/, '$1/'),
+                      )}>
+                      <HeaderNavigation navigation={navigation} />
+                    </Nav>
+                  )}
                 </Location>
                 <SocialIcons urls={socialLinks} />
               </Navbar.Collapse>

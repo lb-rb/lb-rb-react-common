@@ -14,28 +14,18 @@
   },
   "scripts": {
     "exec": "PATH=\"$PATH:./node_modules/.bin\" $@",
-    "build": "npm run exec -- gatsby build",
-    "develop": "npm run exec -- gatsby develop",
     "flow": "npm run exec flow",
     "format": "npm run exec -- prettier --config .prettierrc --write \"**/*.{js,jsx,json,md}\"",
     "format:diff": "npm run exec -- prettier --config .prettierrc --list-different \"**/*.{js,jsx,json,md}\"",
     "lint": "npm run exec -- eslint .",
     "lint:fix": "npm run exec -- eslint --fix .",
-    "test": "npm run exec -- testcafe all tests/",
-    "test-cli": "npm run exec -- testcafe -c 2 chromium:headless,firefox:headless -s takeOnFails=true all tests/",
-    "browsers": "npm run exec -- testcafe -b",
-    "reports": "export DATE_TIME=$(date +%FT%H%M%S) && npm run exec -- testcafe 'chromium:headless:emulation:width=4096;height=2160' --video reports/${DATE_TIME}/videos --screenshots path=reports/${DATE_TIME}/screenshots,takeOnFails=false all tests/",
-    "ci": "npm run exec -- npm-run-all format:diff --parallel lint flow test-cli",
-    "start": "npm run develop",
-    "serve": "npm run exec -- gatsby serve",
-    "clean": "npm run exec -- gatsby clean"
+    "ci": "npm run exec -- npm-run-all format:diff --parallel lint flow"
   },
   "engines": {
     "node": ">13.3.0",
     "npm": "^6.13.1"
   },
   "workspaces": [
-    "packages/*",
     "."
   ],
   "dependencies": {

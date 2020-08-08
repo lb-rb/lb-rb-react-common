@@ -9,7 +9,7 @@ import {
   InputGroup,
   Overlay,
   OverlayTrigger,
-  Popover
+  Popover,
 } from 'react-bootstrap';
 
 import PropTypes from 'prop-types';
@@ -17,7 +17,7 @@ import PropTypes from 'prop-types';
 let instanceCount = 0;
 
 class CalendarHeader extends React.Component {
-  static displayName = 'DatePickerHeader'
+  static displayName = 'DatePickerHeader';
 
   static propTypes = {
     displayDate: PropTypes.object.isRequired,
@@ -27,14 +27,14 @@ class CalendarHeader extends React.Component {
     monthLabels: PropTypes.array.isRequired,
     previousButtonElement: PropTypes.oneOfType([
       PropTypes.string,
-      PropTypes.object
+      PropTypes.object,
     ]).isRequired,
     nextButtonElement: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
-      .isRequired
-  }
+      .isRequired,
+  };
 
   displayingMinMonth = () => {
-    if (!this.props.minDate) return false;
+    if (!this.props.minDate) { return false; }
 
     const displayDate = new Date(this.props.displayDate);
     const minDate = new Date(this.props.minDate);
@@ -42,10 +42,10 @@ class CalendarHeader extends React.Component {
       minDate.getFullYear() == displayDate.getFullYear() &&
       minDate.getMonth() == displayDate.getMonth()
     );
-  }
+  };
 
   displayingMaxMonth = () => {
-    if (!this.props.maxDate) return false;
+    if (!this.props.maxDate) { return false; }
 
     const displayDate = new Date(this.props.displayDate);
     const maxDate = new Date(this.props.maxDate);
@@ -53,21 +53,21 @@ class CalendarHeader extends React.Component {
       maxDate.getFullYear() == displayDate.getFullYear() &&
       maxDate.getMonth() == displayDate.getMonth()
     );
-  }
+  };
 
   handleClickPrevious = () => {
     const newDisplayDate = new Date(this.props.displayDate);
     newDisplayDate.setDate(1);
     newDisplayDate.setMonth(newDisplayDate.getMonth() - 1);
     this.props.onChange(newDisplayDate);
-  }
+  };
 
   handleClickNext = () => {
     const newDisplayDate = new Date(this.props.displayDate);
     newDisplayDate.setDate(1);
     newDisplayDate.setMonth(newDisplayDate.getMonth() + 1);
     this.props.onChange(newDisplayDate);
-  }
+  };
 
   render() {
     return (
@@ -75,8 +75,7 @@ class CalendarHeader extends React.Component {
         <div
           className="text-muted float-sm-left datepicker-previous-wrapper"
           onClick={this.handleClickPrevious}
-          style={{ cursor: 'pointer', userSelect: 'none' }}
-        >
+          style={{cursor: 'pointer', userSelect: 'none'}}>
           {this.displayingMinMonth() ? null : this.props.previousButtonElement}
         </div>
         <span>
@@ -86,8 +85,7 @@ class CalendarHeader extends React.Component {
         <div
           className="text-muted float-sm-right datepicker-next-wrapper"
           onClick={this.handleClickNext}
-          style={{ cursor: 'pointer', userSelect: 'none' }}
-        >
+          style={{cursor: 'pointer', userSelect: 'none'}}>
           {this.displayingMaxMonth() ? null : this.props.nextButtonElement}
         </div>
       </div>
@@ -98,7 +96,7 @@ class CalendarHeader extends React.Component {
 const daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
 class Calendar extends React.Component {
-  static displayName = 'DatePickerCalendar'
+  static displayName = 'DatePickerCalendar';
 
   static propTypes = {
     selectedDate: PropTypes.object,
@@ -112,20 +110,22 @@ class Calendar extends React.Component {
     showTodayButton: PropTypes.bool,
     todayButtonLabel: PropTypes.string,
     roundedCorners: PropTypes.bool,
-    showWeeks: PropTypes.bool
-  }
+    showWeeks: PropTypes.bool,
+  };
 
   handleClick = e => {
     const day = e.currentTarget.getAttribute('data-day');
-    const newSelectedDate = this.setTimeToNoon(new Date(this.props.displayDate));
+    const newSelectedDate = this.setTimeToNoon(
+      new Date(this.props.displayDate),
+    );
     newSelectedDate.setDate(day);
     this.props.onChange(newSelectedDate);
-  }
+  };
 
   handleClickToday = () => {
     const newSelectedDate = this.setTimeToNoon(new Date());
     this.props.onChange(newSelectedDate);
-  }
+  };
 
   setTimeToNoon = date => {
     date.setHours(12);
@@ -133,7 +133,7 @@ class Calendar extends React.Component {
     date.setSeconds(0);
     date.setMilliseconds(0);
     return date;
-  }
+  };
 
   getWeekNumber = date => {
     const target = new Date(date.valueOf());
@@ -145,7 +145,7 @@ class Calendar extends React.Component {
       target.setMonth(0, 1 + ((4 - target.getDay() + 7) % 7));
     }
     return 1 + Math.ceil((firstThursday - target) / 604800000);
-  }
+  };
 
   render() {
     const currentDate = this.setTimeToNoon(new Date());
@@ -165,10 +165,10 @@ class Calendar extends React.Component {
       this.props.weekStartsOn > 1
         ? firstDay.getDay() - this.props.weekStartsOn + 7
         : this.props.weekStartsOn === 1
-        ? firstDay.getDay() === 0
-          ? 6
-          : firstDay.getDay() - 1
-        : firstDay.getDay();
+          ? firstDay.getDay() === 0
+            ? 6
+            : firstDay.getDay() - 1
+          : firstDay.getDay();
     const showWeeks = this.props.showWeeks;
 
     let monthLength = daysInMonth[month];
@@ -188,13 +188,14 @@ class Calendar extends React.Component {
           const date = new Date(year, month, day, 12, 0, 0, 0).toISOString();
           const beforeMinDate =
             minDate && Date.parse(date) < Date.parse(minDate);
-          const afterMinDate = maxDate && Date.parse(date) > Date.parse(maxDate);
+          const afterMinDate =
+            maxDate && Date.parse(date) > Date.parse(maxDate);
           let clickHandler = this.handleClick;
           const style = {
             userSelect: 'none',
             cursor: 'pointer',
             padding: this.props.cellPadding,
-            borderRadius: this.props.roundedCorners ? '.25rem' : 0
+            borderRadius: this.props.roundedCorners ? '.25rem' : 0,
           };
 
           if (beforeMinDate || afterMinDate) {
@@ -213,10 +214,9 @@ class Calendar extends React.Component {
               data-day={day}
               onClick={clickHandler}
               style={style}
-              className={className}
-            >
+              className={className}>
               {day}
-            </td>
+            </td>,
           );
           day++;
         } else {
@@ -226,7 +226,7 @@ class Calendar extends React.Component {
 
       if (showWeeks) {
         const weekNum = this.getWeekNumber(
-          new Date(year, month, day - 1, 12, 0, 0, 0)
+          new Date(year, month, day - 1, 12, 0, 0, 0),
         );
         week.unshift(
           <td
@@ -234,12 +234,11 @@ class Calendar extends React.Component {
             style={{
               padding: this.props.cellPadding,
               fontSize: '0.8em',
-              color: 'darkgrey'
+              color: 'darkgrey',
             }}
-            className="text-muted"
-          >
+            className="text-muted">
             {weekNum}
-          </td>
+          </td>,
         );
       }
 
@@ -252,7 +251,7 @@ class Calendar extends React.Component {
     const weekColumn = showWeeks ? (
       <td
         className="text-muted current-week"
-        style={{ padding: this.props.cellPadding }}
+        style={{padding: this.props.cellPadding}}
       />
     ) : null;
 
@@ -266,8 +265,7 @@ class Calendar extends React.Component {
                 <td
                   key={index}
                   className="text-muted"
-                  style={{ padding: this.props.cellPadding }}
-                >
+                  style={{padding: this.props.cellPadding}}>
                   <small>{label}</small>
                 </td>
               );
@@ -280,14 +278,12 @@ class Calendar extends React.Component {
             <tr>
               <td
                 colSpan={this.props.dayLabels.length}
-                style={{ paddingTop: '9px' }}
-              >
+                style={{paddingTop: '9px'}}>
                 <Button
                   block
                   size="xs"
                   className="u-today-button"
-                  onClick={this.handleClickToday}
-                >
+                  onClick={this.handleClickToday}>
                   {this.props.todayButtonLabel}
                 </Button>
               </td>
@@ -302,10 +298,10 @@ class Calendar extends React.Component {
 const language =
   typeof window !== 'undefined' && window.navigator
     ? (
-        window.navigator.userLanguage ||
+      window.navigator.userLanguage ||
         window.navigator.language ||
         ''
-      ).toLowerCase()
+    ).toLowerCase()
     : '';
 const dateFormat =
   !language || language === 'en-us' ? 'MM/DD/YYYY' : 'DD/MM/YYYY';
@@ -333,23 +329,23 @@ export default class DatePicker extends React.Component {
     weekStartsOnMonday: (props, propName, componentName) => {
       if (props[propName]) {
         return new Error(
-          `Prop '${propName}' supplied to '${componentName}' is obsolete. Use 'weekStartsOn' instead.`
+          `Prop '${propName}' supplied to '${componentName}' is obsolete. Use 'weekStartsOn' instead.`,
         );
       }
     },
     weekStartsOn: PropTypes.number,
     clearButtonElement: PropTypes.oneOfType([
       PropTypes.string,
-      PropTypes.object
+      PropTypes.object,
     ]),
     showClearButton: PropTypes.bool,
     previousButtonElement: PropTypes.oneOfType([
       PropTypes.string,
-      PropTypes.object
+      PropTypes.object,
     ]),
     nextButtonElement: PropTypes.oneOfType([
       PropTypes.string,
-      PropTypes.object
+      PropTypes.object,
     ]),
     calendarPlacement: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
     dateFormat: PropTypes.string, // 'MM/DD/YYYY', 'DD/MM/YYYY', 'YYYY/MM/DD', 'DD-MM-YYYY'
@@ -366,14 +362,14 @@ export default class DatePicker extends React.Component {
     showWeeks: PropTypes.bool,
     children: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.node),
-      PropTypes.node
+      PropTypes.node,
     ]),
     onInvalid: PropTypes.func,
     noValidate: PropTypes.bool,
     isValid: PropTypes.bool,
     isInvalid: PropTypes.bool,
     feedback: PropTypes.string,
-  }
+  };
 
   static defaultProps = {
     cellPadding: '5px',
@@ -390,13 +386,13 @@ export default class DatePicker extends React.Component {
       'September',
       'October',
       'November',
-      'December'
+      'December',
     ],
     clearButtonElement: '×',
     previousButtonElement: '<',
     nextButtonElement: '>',
     calendarPlacement: 'bottom',
-    dateFormat: dateFormat,
+    dateFormat,
     showClearButton: true,
     autoFocus: false,
     disabled: false,
@@ -407,14 +403,14 @@ export default class DatePicker extends React.Component {
     instanceCount: instanceCount++,
     style: {},
     roundedCorners: false,
-    noValidate: false
-  }
+    noValidate: false,
+  };
 
   constructor(props) {
     super(props);
     if (props.value && props.defaultValue) {
       throw new Error(
-        'Conflicting DatePicker properties \'value\' and \'defaultValue\''
+        "Conflicting DatePicker properties 'value' and 'defaultValue'",
       );
     }
     const state = this.makeDateValues(props.value || props.defaultValue);
@@ -434,7 +430,7 @@ export default class DatePicker extends React.Component {
     state.placeholder = props.placeholder || props.dateFormat;
     state.separator = props.dateFormat.match(/[^A-Z]/)[0];
     this.state = {
-      ...state
+      ...state,
     };
   }
 
@@ -457,7 +453,7 @@ export default class DatePicker extends React.Component {
       displayDate = new Date(selectedDate);
     } else {
       const today = new Date(
-        `${new Date().toISOString().slice(0, 10)}T12:00:00.000Z`
+        `${new Date().toISOString().slice(0, 10)}T12:00:00.000Z`,
       );
       if (minDate && Date.parse(minDate) >= Date.parse(today)) {
         displayDate = minDate;
@@ -470,11 +466,11 @@ export default class DatePicker extends React.Component {
 
     return {
       value: selectedDate ? selectedDate.toISOString() : null,
-      displayDate: displayDate,
-      selectedDate: selectedDate,
-      inputValue: inputValue
+      displayDate,
+      selectedDate,
+      inputValue,
     };
-  }
+  };
 
   clear = () => {
     if (this.props.onClear) {
@@ -486,14 +482,14 @@ export default class DatePicker extends React.Component {
     if (this.props.onChange) {
       this.props.onChange(null, null);
     }
-  }
+  };
 
   handleHide = () => {
     if (this.state.inputFocused) {
       return;
     }
     this.setState({
-      focused: false
+      focused: false,
     });
     if (this.props.onBlur) {
       const event = document.createEvent('CustomEvent');
@@ -501,12 +497,12 @@ export default class DatePicker extends React.Component {
       ReactDOM.findDOMNode(this.hiddenInput).dispatchEvent(event);
       this.props.onBlur(event);
     }
-  }
+  };
 
   handleKeyDown = e => {
     if (e.which === 9 && this.state.inputFocused) {
       this.setState({
-        focused: false
+        focused: false,
       });
 
       if (this.props.onBlur) {
@@ -516,7 +512,7 @@ export default class DatePicker extends React.Component {
         this.props.onBlur(event);
       }
     }
-  }
+  };
 
   handleFocus = () => {
     if (this.state.focused === true) {
@@ -528,7 +524,7 @@ export default class DatePicker extends React.Component {
     this.setState({
       inputFocused: true,
       focused: true,
-      calendarPlacement: placement
+      calendarPlacement: placement,
     });
 
     if (this.props.onFocus) {
@@ -537,13 +533,13 @@ export default class DatePicker extends React.Component {
       ReactDOM.findDOMNode(this.hiddenInput).dispatchEvent(event);
       this.props.onFocus(event);
     }
-  }
+  };
 
   handleBlur = () => {
     this.setState({
-      inputFocused: false
+      inputFocused: false,
     });
-  }
+  };
 
   shouldComponentUpdate(nextProps, nextState) {
     return !(
@@ -555,11 +551,11 @@ export default class DatePicker extends React.Component {
     return this.state.selectedDate
       ? this.state.selectedDate.toISOString()
       : null;
-  }
+  };
 
   getFormattedValue = () => {
     return this.state.displayDate ? this.state.inputValue : null;
-  }
+  };
 
   getCalendarPlacement = () => {
     const tag = Object.prototype.toString.call(this.props.calendarPlacement);
@@ -573,13 +569,13 @@ export default class DatePicker extends React.Component {
     } else {
       return this.props.calendarPlacement;
     }
-  }
+  };
 
   makeInputValueString = date => {
     const month = date.getMonth() + 1;
     const day = date.getDate();
 
-    //this method is executed during intialState setup... handle a missing state properly
+    // this method is executed during intialState setup... handle a missing state properly
     const separator = this.state
       ? this.state.separator
       : this.props.dateFormat.match(/[^A-Z]/)[0];
@@ -608,7 +604,7 @@ export default class DatePicker extends React.Component {
         (day > 9 ? day : `0${day}`)
       );
     }
-  }
+  };
 
   handleBadInput = originalValue => {
     const parts = originalValue
@@ -643,9 +639,9 @@ export default class DatePicker extends React.Component {
       }
     }
     this.setState({
-      inputValue: parts.join(this.state.separator)
+      inputValue: parts.join(this.state.separator),
     });
-  }
+  };
 
   handleInputChange = () => {
     const originalValue = ReactDOM.findDOMNode(this.input).value;
@@ -707,12 +703,12 @@ export default class DatePicker extends React.Component {
         12,
         0,
         0,
-        0
+        0,
       );
       this.setState({
-        selectedDate: selectedDate,
+        selectedDate,
         displayDate: selectedDate,
-        value: selectedDate.toISOString()
+        value: selectedDate.toISOString(),
       });
 
       if (this.props.onChange) {
@@ -721,24 +717,24 @@ export default class DatePicker extends React.Component {
     }
 
     this.setState({
-      inputValue: inputValue
+      inputValue,
     });
-  }
+  };
 
   onChangeMonth = newDisplayDate => {
     this.setState({
-      displayDate: newDisplayDate
+      displayDate: newDisplayDate,
     });
-  }
+  };
 
   onChangeDate = newSelectedDate => {
     const inputValue = this.makeInputValueString(newSelectedDate);
     this.setState({
-      inputValue: inputValue,
+      inputValue,
       selectedDate: newSelectedDate,
       displayDate: newSelectedDate,
       value: newSelectedDate.toISOString(),
-      focused: false
+      focused: false,
     });
 
     if (this.props.onBlur) {
@@ -751,7 +747,7 @@ export default class DatePicker extends React.Component {
     if (this.props.onChange) {
       this.props.onChange(newSelectedDate.toISOString(), inputValue);
     }
-  }
+  };
 
   componentDidUpdate(prevProps) {
     const value = this.props.value;
@@ -778,7 +774,7 @@ export default class DatePicker extends React.Component {
         style: this.props.style,
         autoComplete: this.props.autoComplete,
         onInvalid: this.props.onInvalid,
-        noValidate: this.props.noValidate
+        noValidate: this.props.noValidate,
       })
     ) : (
       <Form.Control
@@ -815,13 +811,12 @@ export default class DatePicker extends React.Component {
         placement={'bottom'}
         onHide={this.handleHide}
         rootClose
-        delay={{ show: 250, hide: 100 }}
+        delay={{show: 250, hide: 100}}
         disabled={this.props.disabled}
         overlay={
           <Popover
             id={`date-picker-popover-${this.props.instanceCount}`}
-            className="date-picker-popover"
-          >
+            className="date-picker-popover">
             <Popover.Title>
               <CalendarHeader
                 previousButtonElement={this.props.previousButtonElement}
@@ -851,16 +846,14 @@ export default class DatePicker extends React.Component {
               />
             </Popover.Content>
           </Popover>
-        }
-      >
+        }>
         <InputGroup
           ref={r => {
             this.inputGroup = r;
           }}
           bsPrefix={this.props.showClearButton ? this.props.bsPrefix : ''}
           size={this.props.size}
-          id={this.props.id ? `${this.props.id}_group` : null}
-        >
+          id={this.props.id ? `${this.props.id}_group` : null}>
           {control}
           {this.props.showClearButton && !this.props.customControl && (
             <InputGroup.Append
@@ -869,23 +862,28 @@ export default class DatePicker extends React.Component {
                 cursor:
                   this.state.inputValue && !this.props.disabled
                     ? 'pointer'
-                    : 'not-allowed'
-              }}
-            >
+                    : 'not-allowed',
+              }}>
               <InputGroup.Text>
                 <div
                   style={{
                     opacity:
-                      this.state.inputValue && !this.props.disabled ? 1 : 0.5
-                  }}
-                >
+                      this.state.inputValue && !this.props.disabled ? 1 : 0.5,
+                  }}>
                   {this.props.clearButtonElement}
                 </div>
               </InputGroup.Text>
             </InputGroup.Append>
           )}
           {this.props.feedback && (
-            <Form.Control.Feedback type={this.props.isInvalid ? 'invalid' : (this.props.isValid ? 'valid' : null)}>
+            <Form.Control.Feedback
+              type={
+                this.props.isInvalid
+                  ? 'invalid'
+                  : this.props.isValid
+                    ? 'valid'
+                    : null
+              }>
               {this.props.feedback}
             </Form.Control.Feedback>
           )}

@@ -4,15 +4,12 @@ import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Nav from 'react-bootstrap/Nav';
-import { Location } from '@reach/router';
+import {Location} from '@reach/router';
 
 import {colors} from 'styles/theme';
 import NavLink from '../Header/NavLink';
 
-import {
-  linksShape,
-  sectionShape,
-} from '../../../navigation/Primary';
+import {linksShape, sectionShape} from '../../../navigation/Primary';
 
 class NavSections extends React.Component {
   static get propTypes() {
@@ -74,24 +71,29 @@ class Footer extends Component<Props> {
     return (
       <Col>
         <footer
-          className='page-footer font-small blue pt-4'
+          className="page-footer font-small blue pt-4"
           css={{
             paddingTop: 30,
             backgroundColor: colors.light.backgroundColor,
             color: colors.light.color,
           }}>
-          <Navbar expand='lg'>
+          <Navbar expand="lg">
             <Container>
               <Location>
-               {({ navigate, location }) => (
-                 <Nav defaultActiveKey='/' className="mr-auto" activeKey={decodeURI(location.pathname.replace(/([^\/])$/, '$1/'))}>
-                   <FooterNavigation navigation={navigation} />
-                 </Nav>
-               )}
+                {({navigate, location}) => (
+                  <Nav
+                    defaultActiveKey="/"
+                    className="mr-auto"
+                    activeKey={decodeURI(
+                      location.pathname.replace(/([^\/])$/, '$1/'),
+                    )}>
+                    <FooterNavigation navigation={navigation} />
+                  </Nav>
+                )}
               </Location>
             </Container>
           </Navbar>
-          <br/>
+          <br />
         </footer>
       </Col>
     );

@@ -1,5 +1,4 @@
 import React from 'react';
-import {Link} from 'gatsby';
 import {media} from '../../../utils/media';
 import {colors} from 'styles/theme';
 
