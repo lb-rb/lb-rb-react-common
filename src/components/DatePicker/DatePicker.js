@@ -34,7 +34,9 @@ class CalendarHeader extends React.Component {
   };
 
   displayingMinMonth = () => {
-    if (!this.props.minDate) { return false; }
+    if (!this.props.minDate) {
+      return false;
+    }
 
     const displayDate = new Date(this.props.displayDate);
     const minDate = new Date(this.props.minDate);
@@ -45,7 +47,9 @@ class CalendarHeader extends React.Component {
   };
 
   displayingMaxMonth = () => {
-    if (!this.props.maxDate) { return false; }
+    if (!this.props.maxDate) {
+      return false;
+    }
 
     const displayDate = new Date(this.props.displayDate);
     const maxDate = new Date(this.props.maxDate);
@@ -113,7 +117,7 @@ class Calendar extends React.Component {
     showWeeks: PropTypes.bool,
   };
 
-  handleClick = e => {
+  handleClick = (e) => {
     const day = e.currentTarget.getAttribute('data-day');
     const newSelectedDate = this.setTimeToNoon(
       new Date(this.props.displayDate),
@@ -127,7 +131,7 @@ class Calendar extends React.Component {
     this.props.onChange(newSelectedDate);
   };
 
-  setTimeToNoon = date => {
+  setTimeToNoon = (date) => {
     date.setHours(12);
     date.setMinutes(0);
     date.setSeconds(0);
@@ -135,7 +139,7 @@ class Calendar extends React.Component {
     return date;
   };
 
-  getWeekNumber = date => {
+  getWeekNumber = (date) => {
     const target = new Date(date.valueOf());
     const dayNr = (date.getDay() + 6) % 7;
     target.setDate(target.getDate() - dayNr + 3);
@@ -165,10 +169,10 @@ class Calendar extends React.Component {
       this.props.weekStartsOn > 1
         ? firstDay.getDay() - this.props.weekStartsOn + 7
         : this.props.weekStartsOn === 1
-          ? firstDay.getDay() === 0
-            ? 6
-            : firstDay.getDay() - 1
-          : firstDay.getDay();
+        ? firstDay.getDay() === 0
+          ? 6
+          : firstDay.getDay() - 1
+        : firstDay.getDay();
     const showWeeks = this.props.showWeeks;
 
     let monthLength = daysInMonth[month];
@@ -298,10 +302,10 @@ class Calendar extends React.Component {
 const language =
   typeof window !== 'undefined' && window.navigator
     ? (
-      window.navigator.userLanguage ||
+        window.navigator.userLanguage ||
         window.navigator.language ||
         ''
-    ).toLowerCase()
+      ).toLowerCase()
     : '';
 const dateFormat =
   !language || language === 'en-us' ? 'MM/DD/YYYY' : 'DD/MM/YYYY';
@@ -434,7 +438,7 @@ export default class DatePicker extends React.Component {
     };
   }
 
-  makeDateValues = isoString => {
+  makeDateValues = (isoString) => {
     let displayDate;
     const selectedDate = isoString
       ? new Date(`${isoString.slice(0, 10)}T12:00:00.000Z`)
@@ -499,7 +503,7 @@ export default class DatePicker extends React.Component {
     }
   };
 
-  handleKeyDown = e => {
+  handleKeyDown = (e) => {
     if (e.which === 9 && this.state.inputFocused) {
       this.setState({
         focused: false,
@@ -571,7 +575,7 @@ export default class DatePicker extends React.Component {
     }
   };
 
-  makeInputValueString = date => {
+  makeInputValueString = (date) => {
     const month = date.getMonth() + 1;
     const day = date.getDate();
 
@@ -606,7 +610,7 @@ export default class DatePicker extends React.Component {
     }
   };
 
-  handleBadInput = originalValue => {
+  handleBadInput = (originalValue) => {
     const parts = originalValue
       .replace(new RegExp(`[^0-9${this.state.separator}]`), '')
       .split(this.state.separator);
@@ -721,13 +725,13 @@ export default class DatePicker extends React.Component {
     });
   };
 
-  onChangeMonth = newDisplayDate => {
+  onChangeMonth = (newDisplayDate) => {
     this.setState({
       displayDate: newDisplayDate,
     });
   };
 
-  onChangeDate = newSelectedDate => {
+  onChangeDate = (newSelectedDate) => {
     const inputValue = this.makeInputValueString(newSelectedDate);
     this.setState({
       inputValue,
@@ -782,7 +786,7 @@ export default class DatePicker extends React.Component {
         name={this.props.name}
         value={this.state.inputValue || ''}
         required={this.props.required}
-        ref={r => {
+        ref={(r) => {
           this.input = r;
         }}
         type="text"
@@ -848,7 +852,7 @@ export default class DatePicker extends React.Component {
           </Popover>
         }>
         <InputGroup
-          ref={r => {
+          ref={(r) => {
             this.inputGroup = r;
           }}
           bsPrefix={this.props.showClearButton ? this.props.bsPrefix : ''}
@@ -881,8 +885,8 @@ export default class DatePicker extends React.Component {
                 this.props.isInvalid
                   ? 'invalid'
                   : this.props.isValid
-                    ? 'valid'
-                    : null
+                  ? 'valid'
+                  : null
               }>
               {this.props.feedback}
             </Form.Control.Feedback>

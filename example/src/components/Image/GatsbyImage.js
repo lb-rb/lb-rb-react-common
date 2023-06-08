@@ -1,5 +1,5 @@
 import {StaticQuery, graphql} from 'gatsby';
-import Img from 'gatsby-image';
+import {GatsbyImage as Img} from 'gatsby-plugin-image';
 import React from 'react';
 
 function GatsbyImage(props) {
@@ -18,17 +18,20 @@ function GatsbyImage(props) {
                 relativePath
                 name
                 childImageSharp {
-                  sizes(maxWidth: 1920) {
-                    ...GatsbyImageSharpSizes
-                  }
+                  gatsbyImageData(
+                    layout: CONSTRAINED
+                    width: 1920
+                    placeholder: BLURRED
+                    formats: [AUTO, WEBP]
+                  )
                 }
               }
             }
           }
         }
       `}
-      render={data => {
-        const image = data.images.edges.find(n => {
+      render={(data) => {
+        const image = data.images.edges.find((n) => {
           return n.node.relativePath.includes(
             props.src.replace(/^\/assets\//g, ''),
           );
@@ -37,9 +40,9 @@ function GatsbyImage(props) {
           return null;
         }
 
-        const imageSizes = image.node.childImageSharp.sizes;
+        const imageData = image.node.childImageSharp.gatsbyImageData;
         return (
-          <Img className={props.className} alt={props.alt} sizes={imageSizes} />
+          <Img className={props.className} alt={props.alt} image={imageData} />
         );
       }}
     />

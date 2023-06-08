@@ -72,7 +72,7 @@ const ImageAuthor = styled.span`
   color: black;
 `;
 
-const formatDate = date_string => {
+const formatDate = (date_string) => {
   const date = new Date(date_string);
   const options = {year: 'numeric', month: 'long', day: 'numeric'};
   return (
@@ -85,16 +85,8 @@ const formatDate = date_string => {
 
 class ArticleCard extends Component<CardProps> {
   render() {
-    const {
-      children,
-      title,
-      subtitle,
-      author,
-      date,
-      image_author,
-      src,
-      to,
-    } = this.props;
+    const {children, title, subtitle, author, date, image_author, src, to} =
+      this.props;
 
     return (
       <a href={to} className="w-100">

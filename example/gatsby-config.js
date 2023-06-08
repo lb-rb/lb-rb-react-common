@@ -5,19 +5,19 @@ module.exports = {
     title: 'Test',
     siteUrl: 'https://www.lb-rb.org',
   },
+  trailingSlash: 'never',
   mapping: {
     'MarkdownRemark.frontmatter.author': 'AuthorYaml',
     'Mdx.frontmatter.author': 'AuthorYaml',
   },
   plugins: [
     'gatsby-env-variables',
-    'gatsby-plugin-glamor',
     'gatsby-plugin-emotion',
     'gatsby-plugin-react-helmet',
+    'gatsby-plugin-image',
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
     'gatsby-plugin-sitemap',
-    'gatsby-plugin-remove-trailing-slashes',
     {
       resolve: 'gatsby-source-filesystem',
       options: {
@@ -40,16 +40,17 @@ module.exports = {
       },
     },
     {
+      resolve: 'gatsby-plugin-exclude',
+      options: {paths: [`${__dirname}/packages/**`]},
+    },
+    {
       resolve: 'gatsby-plugin-mdx',
       options: {
         extensions: ['.md', '.mdx'],
-        remarkPlugins: [require('remark-abbr')],
-        shouldBlockNodeFromTransformation(node) {
-          return (
-            ['NPMPackage', 'NPMPackageReadme'].includes(node.internal.type) ||
-            (node.internal.type === 'File' &&
-              path.parse(node.dir).dir.endsWith('packages'))
-          );
+        mdxOptions: {
+          remarkPlugins: [
+            // require('remark-gfm'),
+          ],
         },
         gatsbyRemarkPlugins: [
           'gatsby-remark-embedder',
@@ -57,7 +58,9 @@ module.exports = {
           {
             resolve: 'gatsby-remark-images',
             options: {
-              maxWidth: 786,
+              maxWidth: 1920,
+              withWebp: true,
+              withAvif: true,
               backgroundColor: '#ffffff',
             },
           },
@@ -70,10 +73,26 @@ module.exports = {
           'gatsby-remark-autolink-headers',
           'gatsby-remark-copy-linked-files',
           'gatsby-remark-smartypants',
+          {
+            resolve: 'gatsby-remark-prismjs',
+            options: {
+              aliases: {
+                dosini: 'ini',
+                env: 'bash',
+                es6: 'js',
+                flowchart: 'none',
+                gitignore: 'none',
+                gql: 'graphql',
+                htaccess: 'apacheconf',
+                mdx: 'markdown',
+                ml: 'fsharp',
+                styl: 'stylus',
+              },
+            },
+          },
         ],
       },
     },
-    'gatsby-plugin-mdx-frontmatter',
     {
       resolve: 'gatsby-transformer-remark',
       options: {
@@ -84,7 +103,9 @@ module.exports = {
           {
             resolve: 'gatsby-remark-images',
             options: {
-              maxWidth: 786,
+              maxWidth: 1920,
+              withWebp: true,
+              // withAvif: true,
               backgroundColor: '#ffffff',
             },
           },

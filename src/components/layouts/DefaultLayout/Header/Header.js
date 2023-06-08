@@ -45,7 +45,7 @@ type Props = {
 class SocialIcons extends React.Component {
   render() {
     const {urls} = this.props;
-    return urls.map(url => {
+    return urls.map((url) => {
       return <SocialIconStyled url={url} />;
     });
   }

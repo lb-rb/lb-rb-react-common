@@ -1,4 +1,4 @@
-import {MDXRenderer} from 'gatsby-plugin-mdx';
+import {MDXProvider} from '@mdx-js/react';
 import React from 'react';
 import PropTypes from 'prop-types';
 import {graphql, Link} from 'gatsby';
@@ -69,8 +69,18 @@ const ImageAuthor = styled.span`
   font-size: small;
 `;
 
-const formatDate = date_string => {
-  const date = new Date(date_string);
+const Uppercase = styled.span`
+  text-transform: uppercase;
+`;
+
+const SmallCaps = styled.span`
+  font-variant: all-small-caps;
+`;
+
+const formatDate = (date_string) => {
+  const date = new Date(
+    /^\d+$/.test(date_string) ? parseInt(date_string) : date_string,
+  );
   const options = {year: 'numeric', month: 'long', day: 'numeric'};
   return (
     date.toLocaleDateString('de-DE', options) +
@@ -80,7 +90,19 @@ const formatDate = date_string => {
   );
 };
 
-const Articles = ({data}) => (
+const shortcodes = {
+  Image,
+  Card,
+  CardDeck,
+  StyledCard,
+  CardTitle,
+  ImageAuthor,
+  Author,
+  Uppercase,
+  SmallCaps,
+};
+
+const Articles = ({data, children}) => (
   <DefaultLayout navigation={navigation}>
     <Title
       title={
@@ -92,11 +114,12 @@ const Articles = ({data}) => (
       description={data.mdx.frontmatter.subtitle}
       image={createUrl(data.mdx.frontmatter.image)}
       url={createUrl('/' + data.mdx.fields.slug)}
+      redirect_to={data.mdx.frontmatter.redirect_to}
     />
     <TitleRow>
       <Col>
-        <Link to="/articles">Articles</Link> >
-        {' ' + data.mdx.frontmatter.section}
+        <Link to="/articles">Articles</Link>{' '}
+        {'> ' + data.mdx.frontmatter.section}
         <ArticleTitle>
           <Link to={'/' + data.mdx.fields.slug}>
             {data.mdx.frontmatter.title}
@@ -124,7 +147,7 @@ const Articles = ({data}) => (
           </Card.Footer>
         </StyledCard>
         <div className="article">
-          <MDXRenderer>{data.mdx.body}</MDXRenderer>
+          <MDXProvider components={shortcodes}>{children}</MDXProvider>
         </div>
       </Col>
     </ContentRow>
@@ -133,13 +156,14 @@ const Articles = ({data}) => (
 
 Articles.propTypes = {
   data: PropTypes.object.isRequired,
+  children: PropTypes.object.isRequired,
 };
 
 export const pageQuery = graphql`
   query getArticleMarkdown($slug: String!) {
     mdx(fields: {slug: {eq: $slug}}) {
-      body
       frontmatter {
+        slug
         title
         subtitle
         section
@@ -149,6 +173,7 @@ export const pageQuery = graphql`
         image_title
         image_subtitle
         image_author
+        redirect_to
       }
       fields {
         path

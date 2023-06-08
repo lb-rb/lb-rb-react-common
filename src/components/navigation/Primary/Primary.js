@@ -6,7 +6,7 @@ const sectionLinkShape = PropTypes.shape({
   subtitle: PropTypes.string.isRequired,
   to: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
-  autor: PropTypes.string.isRequired,
+  article_author: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   image_title: PropTypes.string.isRequired,
   image_subtitle: PropTypes.string.isRequired,

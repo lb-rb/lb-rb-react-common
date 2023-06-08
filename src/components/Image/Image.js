@@ -8,5 +8,4 @@ if (useGatsbyImage) {
   Image = GatsbyImage;
 }
 
-console.log(Image);
 export default Image;

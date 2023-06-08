@@ -10,11 +10,16 @@ module.exports = async ({graphql, actions}) => {
     `
       {
         allMdx(limit: 10000) {
-          edges {
-            node {
-              fields {
-                slug
-              }
+          nodes {
+            id
+            frontmatter {
+              slug
+            }
+            fields {
+              slug
+            }
+            internal {
+              contentFilePath
             }
           }
         }
@@ -27,15 +32,15 @@ module.exports = async ({graphql, actions}) => {
     throw Error(entriesQuery.errors);
   }
 
-  entriesQuery.data.allMdx.edges.forEach(edge => {
-    const slug = edge.node.fields.slug;
+  entriesQuery.data.allMdx.nodes.forEach((node) => {
+    const slug = node.fields.slug;
 
     Object.entries(templates)
       .filter(([key]) => slug.includes(`${key}/`))
       .forEach(([key, template]) => {
         actions.createPage({
           path: slug,
-          component: template,
+          component: `${template}?__contentFilePath=${node.internal.contentFilePath}`,
           context: {
             slug,
           },

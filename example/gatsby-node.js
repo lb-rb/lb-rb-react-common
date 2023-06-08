@@ -3,4 +3,5 @@ module.exports = {
   onCreateNode: require('./gatsby-node/onCreateNode'),
   // onCreatePage: require('./gatsby-node/onCreatePage')
   onCreateWebpackConfig: require('./gatsby-node/onCreateWebpackConfig'),
+  createSchemaCustomization: require('./gatsby-node/createSchemaCustomization'),
 };

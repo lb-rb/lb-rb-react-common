@@ -1,4 +1,4 @@
-import {createElement} from 'glamor/react';
+import {jsx} from '@emotion/react';
 
 import type {Node} from 'react';
 
@@ -29,7 +29,7 @@ const Flex = ({
   verticalAlign = 'flex-start',
   ...rest
 }: Props) =>
-  createElement(
+  jsx(
     type,
     {
       css: {

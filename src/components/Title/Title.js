@@ -10,9 +10,10 @@ type Props = {
   description: string,
   image: string,
   url: string,
+  redirect_to?: string,
 };
 
-const Title = ({title, description, image, url}: Props) => {
+const Title = ({title, description, image, url, redirect_to}: Props) => {
   return (
     <Helmet title={title}>
       <meta property="og:title" content={title} />
@@ -26,6 +27,9 @@ const Title = ({title, description, image, url}: Props) => {
       <meta property="og:image" content={image || defaultImage} />
       {url && <meta property="og:url" content={url} />}
       {url && <link rel="canonical" href={url} />}
+      {redirect_to && (
+        <meta http-equiv="refresh" content={'0; url=' + redirect_to} />
+      )}
     </Helmet>
   );
 };

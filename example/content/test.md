@@ -10,6 +10,7 @@ image: /assets/example.png
 image_title: This is a random image
 image_subtitle: Generated with /dev/urandom and convert :D
 image_author: Test
+redirect_to: ''
 ---
 
 Some example text.

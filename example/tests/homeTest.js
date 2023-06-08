@@ -7,7 +7,7 @@ const headerLinkArticles = Selector('header')
 
 fixture`Home`.page(rootUrl);
 
-test('Header link Articles', async t => {
+test('Header link Articles', async (t) => {
   await t
     .takeScreenshot({
       path: 'home.png',

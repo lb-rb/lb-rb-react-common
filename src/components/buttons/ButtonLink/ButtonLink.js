@@ -36,7 +36,7 @@ const baseStyle = {
   },
 };
 
-const styleFor = type => ({
+const styleFor = (type) => ({
   backgroundColor: colors.buttons[type].default.background,
   color: colors.buttons[type].default.text,
   ':hover': {
