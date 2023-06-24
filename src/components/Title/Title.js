@@ -3,7 +3,7 @@ import React from 'react';
 import createUrl from '../../utils/createUrl';
 import {defaultDescription} from 'config';
 
-const defaultImage = createUrl('/favicon.png');
+const defaultFavicon = '/favicon.png';
 
 type Props = {
   title: string,
@@ -11,9 +11,11 @@ type Props = {
   image: string,
   url: string,
   redirect_to?: string,
+  favicon?: string,
 };
 
-const Title = ({title, description, image, url, redirect_to}: Props) => {
+const Title = ({title, description, image, url, redirect_to, favicon}: Props) => {
+  const defaultImage = createUrl(favicon || defaultFavicon);
   return (
     <Helmet title={title}>
       <meta property="og:title" content={title} />
@@ -23,7 +25,7 @@ const Title = ({title, description, image, url, redirect_to}: Props) => {
         content={description || defaultDescription}
       />
       <meta name="description" content={description || defaultDescription} />
-      <link rel="shortcut icon" type="image/png" href="/favicon.png" />
+      <link rel="shortcut icon" type="image/png" href={favicon || defaultFavicon} />
       <meta property="og:image" content={image || defaultImage} />
       {url && <meta property="og:url" content={url} />}
       {url && <link rel="canonical" href={url} />}
