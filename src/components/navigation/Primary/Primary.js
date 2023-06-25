@@ -29,6 +29,8 @@ const linkShape = PropTypes.shape({
   to: PropTypes.string,
   activeSelector: PropTypes.string,
   sections: PropTypes.objectOf(sectionShape),
+  footer: PropTypes.bool,
+  header: PropTypes.bool,
 });
 
 const linksShape = PropTypes.shape({
