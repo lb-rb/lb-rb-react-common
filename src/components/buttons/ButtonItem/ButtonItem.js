@@ -16,7 +16,7 @@ const ButtonItem = ({children}: Props) => (
         paddingLeft: 40,
       },
 
-      '&:first-child': {
+      '&:first-of-type': {
         textAlign: 'right',
         paddingLeft: 7,
         paddingRight: 7,
@@ -26,7 +26,7 @@ const ButtonItem = ({children}: Props) => (
         },
       },
 
-      '&:nth-child(2)': {
+      '&:nth-of-type(2)': {
         paddingLeft: 7,
         paddingRight: 7,
 
