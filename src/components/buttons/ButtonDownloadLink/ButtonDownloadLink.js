@@ -9,15 +9,15 @@ type Props = {
   rest: Array<any>,
 };
 
-const ButtonDiv = ({children, action, type}: Props) => {
+const ButtonDownloadLink = ({children, to, type}: Props) => {
   if (!colors.buttons.hasOwnProperty(type)) {
-    throw new Error(`Unknown ButtonDev type "${type}"`);
+    throw new Error(`Unknown ButtonDownloadLink type "${type}"`);
   }
 
   return (
-    <div onClick={action} css={[baseStyle, styleFor(type)]}>
+    <a href={to} css={[baseStyle, styleFor(type)]} download target="_blank">
       {children}
-    </div>
+    </a>
   );
 };
 
@@ -45,4 +45,4 @@ const styleFor = (type) => ({
   },
 });
 
-export default ButtonDiv;
+export default ButtonDownloadLink;
