@@ -5,17 +5,18 @@ import {colors} from 'styles/theme';
 type Props = {
   children: Node,
   type: string,
+  className: string,
   // eslint-disable-next-line flowtype/no-weak-types
   rest: Array<any>,
 };
 
-const ButtonDownloadLink = ({children, to, type}: Props) => {
+const ButtonDownloadLink = ({children, to, type, className}: Props) => {
   if (!colors.buttons.hasOwnProperty(type)) {
     throw new Error(`Unknown ButtonDownloadLink type "${type}"`);
   }
 
   return (
-    <a href={to} css={[baseStyle, styleFor(type)]} download target="_blank">
+    <a href={to} css={[baseStyle, styleFor(type)]} className={"button-download-link " + className} download target="_blank">
       {children}
     </a>
   );

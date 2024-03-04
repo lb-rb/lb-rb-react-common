@@ -3,10 +3,12 @@ import {media} from '../../../utils/media';
 
 type Props = {
   children: Node,
+  className: String,
 };
 
-const ButtonItem = ({children}: Props) => (
+const ButtonItem = ({children, className}: Props) => (
   <div
+    className={"button-item " + className}
     css={{
       [media.between('small', 'large')]: {
         paddingLeft: 20,

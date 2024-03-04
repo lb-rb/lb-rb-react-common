@@ -5,17 +5,18 @@ import {colors} from 'styles/theme';
 type Props = {
   children: Node,
   type: string,
+  className: string,
   // eslint-disable-next-line flowtype/no-weak-types
   rest: Array<any>,
 };
 
-const ButtonLink = ({children, to, type}: Props) => {
+const ButtonLink = ({children, to, type, className}: Props) => {
   if (!colors.buttons.hasOwnProperty(type)) {
     throw new Error(`Unknown ButtonLink type "${type}"`);
   }
 
   return (
-    <a href={to} css={[baseStyle, styleFor(type)]}>
+    <a href={to} css={[baseStyle, styleFor(type)]} className={"button-link " + className}>
       {children}
     </a>
   );

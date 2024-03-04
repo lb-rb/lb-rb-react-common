@@ -5,17 +5,18 @@ import {colors} from 'styles/theme';
 type Props = {
   children: Node,
   type: string,
+  className: className,
   // eslint-disable-next-line flowtype/no-weak-types
   rest: Array<any>,
 };
 
-const ButtonDiv = ({children, action, type}: Props) => {
+const ButtonDiv = ({children, action, type, className}: Props) => {
   if (!colors.buttons.hasOwnProperty(type)) {
     throw new Error(`Unknown ButtonDev type "${type}"`);
   }
 
   return (
-    <div onClick={action} css={[baseStyle, styleFor(type)]}>
+    <div onClick={action} css={[baseStyle, styleFor(type)]} className={"button-div " + className}>
       {children}
     </div>
   );

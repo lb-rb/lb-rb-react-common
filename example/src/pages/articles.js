@@ -113,7 +113,7 @@ class ArticleCard extends Component<CardProps> {
                   paddingTop: 65,
                 },
               }}>
-              <CTAButton to={to} type="cta">
+              <CTAButton to={to} type="cta" className="cta-button">
                 Read
               </CTAButton>
             </Flex>
