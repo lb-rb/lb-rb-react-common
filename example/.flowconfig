@@ -19,4 +19,4 @@ suppress_type=$FixMe
 suppress_type=$FlowExpectedError
 
 [version]
-^0.207.0
+^0.259.1
