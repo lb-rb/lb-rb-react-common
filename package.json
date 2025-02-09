@@ -22,8 +22,8 @@
     "ci": "npm run exec -- npm-run-all format:diff --parallel flow"
   },
   "engines": {
-    "node": "^18.16.0",
-    "npm": "^9.5.1"
+    "node": "^23.7.0",
+    "npm": "^10.9.2"
   },
   "workspaces": [
     "."

@@ -6,26 +6,24 @@ module.exports = async ({graphql, actions}) => {
     articles: resolve(__dirname, join(templatePath, 'articles.js')),
   };
 
-  const entriesQuery = await graphql(
-    `
-      {
-        allMdx(limit: 10000) {
-          nodes {
-            id
-            frontmatter {
-              slug
-            }
-            fields {
-              slug
-            }
-            internal {
-              contentFilePath
-            }
+  const entriesQuery = await graphql(`
+    {
+      allMdx(limit: 10000) {
+        nodes {
+          id
+          frontmatter {
+            slug
+          }
+          fields {
+            slug
+          }
+          internal {
+            contentFilePath
           }
         }
       }
-    `,
-  );
+    }
+  `);
 
   if (entriesQuery.errors) {
     console.error(entriesQuery.errors);
