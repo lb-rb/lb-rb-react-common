@@ -12,7 +12,10 @@ type Props = {
 const CTADownloadButton = ({children, to, type, className}: Props) => {
   return (
     <ButtonItem className={className}>
-      <ButtonDownloadLink to={to} type={type} className={className + "-content"}>
+      <ButtonDownloadLink
+        to={to}
+        type={type}
+        className={className + '-content'}>
         {children}
       </ButtonDownloadLink>
     </ButtonItem>

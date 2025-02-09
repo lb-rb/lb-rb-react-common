@@ -14,7 +14,14 @@ type Props = {
   favicon?: string,
 };
 
-const Title = ({title, description, image, url, redirect_to, favicon}: Props) => {
+const Title = ({
+  title,
+  description,
+  image,
+  url,
+  redirect_to,
+  favicon,
+}: Props) => {
   const defaultImage = createUrl(favicon || defaultFavicon);
   return (
     <Helmet title={title}>
@@ -25,7 +32,11 @@ const Title = ({title, description, image, url, redirect_to, favicon}: Props) =>
         content={description || defaultDescription}
       />
       <meta name="description" content={description || defaultDescription} />
-      <link rel="shortcut icon" type="image/png" href={favicon || defaultFavicon} />
+      <link
+        rel="shortcut icon"
+        type="image/png"
+        href={favicon || defaultFavicon}
+      />
       <meta property="og:image" content={image || defaultImage} />
       {url && <meta property="og:url" content={url} />}
       {url && <link rel="canonical" href={url} />}

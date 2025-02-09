@@ -16,7 +16,10 @@ const ButtonDiv = ({children, action, type, className}: Props) => {
   }
 
   return (
-    <div onClick={action} css={[baseStyle, styleFor(type)]} className={"button-div " + className}>
+    <div
+      onClick={action}
+      css={[baseStyle, styleFor(type)]}
+      className={'button-div ' + className}>
       {children}
     </div>
   );

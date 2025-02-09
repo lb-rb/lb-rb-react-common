@@ -12,7 +12,7 @@ type Props = {
 const CTAActionButton = ({children, action, type, className}: Props) => {
   return (
     <ButtonItem className={className}>
-      <ButtonDiv action={action} type={type} className={className + "-content"}>
+      <ButtonDiv action={action} type={type} className={className + '-content'}>
         {children}
       </ButtonDiv>
     </ButtonItem>

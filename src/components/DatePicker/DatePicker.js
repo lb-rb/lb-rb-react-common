@@ -169,10 +169,10 @@ class Calendar extends React.Component {
       this.props.weekStartsOn > 1
         ? firstDay.getDay() - this.props.weekStartsOn + 7
         : this.props.weekStartsOn === 1
-        ? firstDay.getDay() === 0
-          ? 6
-          : firstDay.getDay() - 1
-        : firstDay.getDay();
+          ? firstDay.getDay() === 0
+            ? 6
+            : firstDay.getDay() - 1
+          : firstDay.getDay();
     const showWeeks = this.props.showWeeks;
 
     let monthLength = daysInMonth[month];
@@ -885,8 +885,8 @@ export default class DatePicker extends React.Component {
                 this.props.isInvalid
                   ? 'invalid'
                   : this.props.isValid
-                  ? 'valid'
-                  : null
+                    ? 'valid'
+                    : null
               }>
               {this.props.feedback}
             </Form.Control.Feedback>

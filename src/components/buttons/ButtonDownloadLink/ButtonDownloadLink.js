@@ -16,7 +16,12 @@ const ButtonDownloadLink = ({children, to, type, className}: Props) => {
   }
 
   return (
-    <a href={to} css={[baseStyle, styleFor(type)]} className={"button-download-link " + className} download target="_blank">
+    <a
+      href={to}
+      css={[baseStyle, styleFor(type)]}
+      className={'button-download-link ' + className}
+      download
+      target="_blank">
       {children}
     </a>
   );

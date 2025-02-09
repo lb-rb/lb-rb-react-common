@@ -8,7 +8,7 @@ type Props = {
 
 const ButtonItem = ({children, className}: Props) => (
   <div
-    className={"button-item " + className}
+    className={'button-item ' + className}
     css={{
       [media.between('small', 'large')]: {
         paddingLeft: 20,
